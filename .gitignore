@@ -1,0 +1,23 @@
+node_modules/
+dist/
+*.log
+.env.local
+.env.production
+.env
+
+/src/generated/prisma
+/prisma/*.db
+/prisma/*.db-journal
+
+/logs/
+
+coverage/
+.nyc_output/
+
+.DS_Store
+Thumbs.db
+
+*.tsbuildinfo
+
+# Documentation (keep NOTE.md)
+Docs-*.md

@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  password     String
+  role         Role     @default(STUDENT)
+  tokenExpiresAt DateTime? // Nullable; when set, indicates active session expiry
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  student      Student?
+  teacher      Teacher?
+}
+
+model Teacher {
+  id     String  @id @default(uuid())
+  userId String  @unique
+  name   String
+  nip    String  @unique
+  grades Grade[]
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Class {
+  id         String    @id @default(uuid())
+  name       String    @unique
+  gradeLevel Int
+  students   Student[]
+}
+
+model Subject {
+  id     String  @id @default(uuid())
+  name   String  @unique
+  grades Grade[]
+}
+
+model Student {
+  id        String  @id @default(uuid())
+  userId    String  @unique
+  name      String
+  nisn      String  @unique
+  classId   String
+  isDeleted Boolean @default(false)
+  grades    Grade[]
+  class     Class   @relation(fields: [classId], references: [id])
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Grade {
+  id           String   @id @default(uuid())
+  studentId    String
+  subjectId    String
+  teacherId    String
+  score        Float
+  semester     Int
+  academicYear String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  student      Student  @relation(fields: [studentId], references: [id])
+  subject      Subject  @relation(fields: [subjectId], references: [id])
+  teacher      Teacher  @relation(fields: [teacherId], references: [id])
+}
+
+enum Role {
+  ADMIN
+  TEACHER
+  STUDENT
+}
