@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # SMA 0 ASIKJUGA - Backend API Documentation
 
 **Version:** 2.0  
@@ -556,5 +555,5 @@ After running `npm run prisma:seed`, you can use these accounts:
 
 *End of documentation.*
 =======
-# SMA-0-ASIKJUGA
->>>>>>> bd6b756bc32011ab679b12cde0d024998ca45d73
+<!-- # SMA-0-ASIKJUGA
+>>>>>>> bd6b756bc32011ab679b12cde0d024998ca45d73 -->
